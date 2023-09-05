@@ -1,4 +1,4 @@
-const Header = () => {
+function Header() {
     return (
         <div className="navbar bg-neutral text-neutral-content grid justify-items-stretch">
             <div className="justify-self-center">
