@@ -9,7 +9,7 @@ function Home() {
     const [error, setError] = useState(null)
     const [isPending, setIsPending] = useState(true)
     
-    useFetch('http://localhost:8000/tasks', setTasks, setError, setIsPending)
+    useFetch('http://localhost:8000/tasks', setTasks, setError, setIsPending) 
 
     return (
         <div className='md:container md:mx-auto'>
