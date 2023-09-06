@@ -1,20 +1,19 @@
 {
-    "tasks": [
-        {
-            "id": 0,
-            "name": "Task example (0)",
-            "isDone": false
-        },
-        {
-            "id": 1,
-            "name": "Task example (1)",
-            "isDone": true
-        },
-        {
-            "id": 2,
-            "name": "Task example (2)",
-            "isDone": false
-        }
-
-    ]
+  "tasks": [
+    {
+      "isDone": false,
+      "name": "Task example (0)",
+      "id": 0
+    },
+    {
+      "isDone": false,
+      "name": "Task example (1)",
+      "id": 1
+    },
+    {
+      "isDone": true,
+      "name": "Task example (2)",
+      "id": 2
+    }
+  ]
 }

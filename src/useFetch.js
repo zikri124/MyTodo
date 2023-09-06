@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
 
-const useFetch = (url) => {
-    const [data, setData] = useState(null)
+const useFetch = (url, setTasks, setError) => {
+    // const [data, setData] = useState(null)
     const [isPending, setIsPending] = useState(true)
-    const [error, setError] = useState(null)
+    // const [error, setError] = useState(null)
 
     useEffect(() => {
         const abortCont = new AbortController() 
 
         fetch(url, { signal: abortCont.signal })
         .then(res => {
+            console.log("called")
             if (!res.ok) {
                 throw Error("could not fetch the data")
             }
@@ -18,7 +19,7 @@ const useFetch = (url) => {
         .then(data => {
             setIsPending(false)
             setError(null)
-            setData(data)
+            setTasks(data)
         })
         .catch(err => {
             if (err.name === "AbortError") {
@@ -30,9 +31,9 @@ const useFetch = (url) => {
         })
 
         return () => abortCont.abort()
-    }, [url])
+    }, [setError, setTasks, url])
 
-    return { data, isPending, error }
+    return { isPending }
 } 
 
 export default useFetch
