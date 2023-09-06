@@ -7,15 +7,16 @@ import { useState } from 'react';
 function Home() {    
     const [tasks, setTasks] = useState(null)
     const [error, setError] = useState(null)
+    const [isPending, setIsPending] = useState(true)
     
-    const { isPending } = useFetch('http://localhost:8000/tasks', setTasks, setError)
+    useFetch('http://localhost:8000/tasks', setTasks, setError, setIsPending)
 
     return (
         <div className='md:container md:mx-auto'>
             { isPending && <Loading /> }
             { error && <ErrorAlert error={error} tasks={tasks} /> }
             { tasks && <TaskStat tasks={tasks} /> }
-            { tasks && <TasksList tasks={tasks} setTasks={setTasks} setError={setError} /> }
+            { tasks && <TasksList tasks={tasks} setTasks={setTasks} setError={setError} setIsPending={setIsPending} /> }
         </div>
     )
 } 

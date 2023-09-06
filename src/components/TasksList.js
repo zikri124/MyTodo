@@ -1,6 +1,7 @@
 import { useState } from "react"
+import CreateTask from "./CreateTask"
 
-function TasksList({ tasks, setTasks, setError }) {
+function TasksList({ tasks, setTasks, setError, setIsPending }) {
     const [editMode, setEditMode] = useState(null)
 
     function viewTaskTemplate(task) {
@@ -12,7 +13,7 @@ function TasksList({ tasks, setTasks, setError }) {
     function viewEditTaskTemplate(task) {
         return (
             <div>
-                <form onSubmit={HandleEditTask} style={{display: "inline"}}>
+                <form onSubmit={HandleEditTask}>
                     <div className="join">
                         <input name='taskName' placeholder="Task name" className="input input-bordered join-item" type='text' defaultValue={task.name}></input>
                         <button className="btn btn-primary join-item" type='submit'>Edit</button>
@@ -79,6 +80,7 @@ function TasksList({ tasks, setTasks, setError }) {
     
     return ( 
         <div className='mx-auto w-full md:w-3/4 lg:w-1/2'>
+            <CreateTask tasks={tasks} setTasks={setTasks} setError={setError} setIsPending={setIsPending} />
             {tasks.map((task) => (
                 <div className='card bg-base-100 glass mb-2' key={task.id}>
                     <div className="card-body flex flex-row items-center">

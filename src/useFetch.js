@@ -1,10 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
-const useFetch = (url, setTasks, setError) => {
-    // const [data, setData] = useState(null)
-    const [isPending, setIsPending] = useState(true)
-    // const [error, setError] = useState(null)
-
+const useFetch = (url, setTasks, setError, setIsPending) => {
     useEffect(() => {
         const abortCont = new AbortController() 
 
@@ -31,9 +27,9 @@ const useFetch = (url, setTasks, setError) => {
         })
 
         return () => abortCont.abort()
-    }, [setError, setTasks, url])
+    }, [setError, setIsPending, setTasks, url])
 
-    return { isPending }
+    return
 } 
 
 export default useFetch
