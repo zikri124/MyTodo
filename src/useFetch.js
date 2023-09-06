@@ -11,7 +11,7 @@ const useFetch = (url, setTasks, setError) => {
         fetch(url, { signal: abortCont.signal })
         .then(res => {
             console.log("called")
-            if (!res.ok) {
+            if (!res.ok) { 
                 throw Error("could not fetch the data")
             }
             return res.json()

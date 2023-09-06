@@ -13,7 +13,7 @@ function Home() {
     return (
         <div className='md:container md:mx-auto'>
             { isPending && <Loading /> }
-            { error && <ErrorAlert error={error} setTasks={setTasks} /> }
+            { error && <ErrorAlert error={error} tasks={tasks} /> }
             { tasks && <TaskStat tasks={tasks} /> }
             { tasks && <TasksList tasks={tasks} setTasks={setTasks} setError={setError} /> }
         </div>
