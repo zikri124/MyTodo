@@ -1,21 +1,29 @@
 import { useRef } from "react"
+import { useTasksDispatch } from "./TasksProvider"
+import { useAppStateDispatch } from "./AppStateProvider"
 
-function CreateTask({ tasks, setTasks, setError, setIsPending }) {
+function CreateTask() {
+    const tasksDispatch = useTasksDispatch()
+    const appStateDispatch = useAppStateDispatch()
     const newTaskNameInput = useRef()
     
     async function HandleCreateTask(event) {
         event.preventDefault()
 
-        setIsPending(true)
+        // setIsPending(true)
+        appStateDispatch({
+            type: 'set_is_loading',
+            is_loading: true
+        })
 
         const newTaskName = event.target.elements.taskName.value
 
         const body = {
-            isDone: false,
+            is_done: false,
             name: newTaskName 
         }
 
-        const updatedTasks = tasks.slice()
+        // const updatedTasks = tasks.slice()
 
         await fetch('http://localhost:8000/tasks', {
             method: "POST",
@@ -28,13 +36,28 @@ function CreateTask({ tasks, setTasks, setError, setIsPending }) {
         }).then((data) => {
             console.log(data)
             if (data) {
-                updatedTasks.push(data)
+                // updatedTasks.push(data)
                 newTaskNameInput.current.value = ""
-                setTasks(updatedTasks)
-                setIsPending(false)
+                // setTasks(updatedTasks)
+                tasksDispatch({
+                    type: 'add_task',
+                    task: {
+                        id: data.id,
+                        name: body.name
+                    }
+                })
+                // setIsPending(false)
+                appStateDispatch({
+                    type: 'set_is_loading',
+                    is_loading: false
+                })
             }
         }).catch((err) => {
-            setError(err.message)
+            // setError(err.message)
+            appStateDispatch({
+                type: 'add_error',
+                error: err.message
+            })
         })
     }
     

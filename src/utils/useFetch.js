@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 
-const useFetch = (url, setTasks, setError, setIsPending) => {
+
+const useFetch = (url, tasksDispatch, appStateDispatch) => {
     useEffect(() => {
         const abortCont = new AbortController() 
 
@@ -13,21 +14,33 @@ const useFetch = (url, setTasks, setError, setIsPending) => {
             return res.json()
         })
         .then(data => {
-            setIsPending(false)
-            setError(null)
-            setTasks(data)
+            appStateDispatch({
+                type: 'set_is_loading',
+                is_loading: false
+            })
+            tasksDispatch({
+                type: 'set_tasks',
+                tasks: data
+            })
         })
         .catch(err => {
             if (err.name === "AbortError") {
                 console.log("fetch aborted")
             } else {
-                setIsPending(false)
-                setError(err.message)
+                appStateDispatch({
+                    type: 'set_is_loading',
+                    is_loading: false
+                })
+                appStateDispatch({
+                    type: 'set_error',
+                    is_error: true,
+                    error: err
+                })
             }
         })
 
         return () => abortCont.abort()
-    }, [setError, setIsPending, setTasks, url])
+    }, [url, appStateDispatch, tasksDispatch])
 
     return
 } 
