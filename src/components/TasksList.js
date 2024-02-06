@@ -140,10 +140,10 @@ function TasksList() {
         <div className='md:container md:mx-auto w-full md:w-3/4 lg:w-1/2 flex flex-col gap-6' style={{ maxWidth: '100vw' }}>
             <CreateTask />
             {tasks.map((task) => (
-                <div className='card bg-base-100 glass' key={task.id}>
+                <div className='card border border-neutral-400' key={task.id}>
                     <div className="py-2 px-6 flex flex-row items-center">
                         <div className="flex-none">
-                            <input type="checkbox" style={{ marginTop: 'revert' }} className="checkbox checkbox-success me-4" onChange={() => HandleToggleTask(task.id)} defaultChecked={task.is_done ? 'checked' : ''} />
+                            <input type="checkbox" style={{ marginTop: 'revert' }} className="checkbox checkbox-primary me-4" onChange={() => HandleToggleTask(task.id)} defaultChecked={task.is_done ? 'checked' : ''} />
                         </div>
                         <div className="flex-1 w-full">
                             {editMode === task.id ? viewEditTaskTemplate(task) : viewTaskTemplate(task)}

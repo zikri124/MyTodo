@@ -17,13 +17,10 @@ export const AppStateProvider = ({ children }) => {
             </AppStateDispatchContext.Provider>
         </AppStateContextValue.Provider>
     )
-} 
+}
 
 const appStateReducer = (state, action) => {
     switch (action.type) {
-        case 'set_night_mode': {
-            return { ...state, is_night_mode: action.is_night_mode }
-        }
         case 'add_error': {
             return {
                 ...state,
@@ -34,11 +31,11 @@ const appStateReducer = (state, action) => {
         case 'set_is_loading': {
             return { ...state, is_loading: action.is_loading }
         }
-        default : {
-            return {...state}
+        default: {
+            return { ...state }
         }
     }
-}   
+}
 
 export const useAppState = () => {
     return useContext(AppStateContextValue)
@@ -49,7 +46,6 @@ export const useAppStateDispatch = () => {
 }
 
 const initialAppState = {
-    is_night_mode : false,
     is_error: false,
     error: null,
     is_loading: false

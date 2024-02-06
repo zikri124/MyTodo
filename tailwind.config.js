@@ -8,7 +8,7 @@ module.exports = {
     require("daisyui")
   ],
   daisyui: {
-    themes: ["emerald"],
+    themes: false
   },
 }
 

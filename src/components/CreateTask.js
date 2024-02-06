@@ -10,7 +10,6 @@ function CreateTask() {
     async function HandleCreateTask(event) {
         event.preventDefault()
 
-        // setIsPending(true)
         appStateDispatch({
             type: 'set_is_loading',
             is_loading: true
@@ -23,8 +22,6 @@ function CreateTask() {
             name: newTaskName 
         }
 
-        // const updatedTasks = tasks.slice()
-
         await fetch('http://localhost:8000/tasks', {
             method: "POST",
             body: JSON.stringify(body),
@@ -36,9 +33,7 @@ function CreateTask() {
         }).then((data) => {
             console.log(data)
             if (data) {
-                // updatedTasks.push(data)
                 newTaskNameInput.current.value = ""
-                // setTasks(updatedTasks)
                 tasksDispatch({
                     type: 'add_task',
                     task: {
@@ -46,14 +41,12 @@ function CreateTask() {
                         name: body.name
                     }
                 })
-                // setIsPending(false)
                 appStateDispatch({
                     type: 'set_is_loading',
                     is_loading: false
                 })
             }
         }).catch((err) => {
-            // setError(err.message)
             appStateDispatch({
                 type: 'add_error',
                 error: err.message
@@ -66,7 +59,7 @@ function CreateTask() {
             <form onSubmit={HandleCreateTask}>
                 <div className="join flex">
                     <input className="input input-bordered grow join-item" name="taskName" placeholder="Insert task name" ref={newTaskNameInput} />
-                    <button className="btn grow-0 join-item">Add task</button>
+                    <button className="btn btn-primary grow-0 join-item">Add task</button>
                 </div>
             </form>
         </div>

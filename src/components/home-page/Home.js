@@ -8,14 +8,13 @@ import { useTasks, useTasksDispatch } from '../TasksProvider';
 function Home() {
     const appStateDispatch = useAppStateDispatch()
     const appState = useAppState()
-    // const [tasks, setTasks] = useState(null)
     const tasks = useTasks()
     const tasksDispatch = useTasksDispatch()
 
     useFetch('http://localhost:8000/tasks', tasksDispatch, appStateDispatch)
 
     return (
-        <div className='md:container md:mx-auto'>
+        <div className='w-full h-full'>
             {appState.is_loading && <Loading />}
             {appState.is_error && <ErrorAlert />}
             {tasks && <TaskStat tasks={tasks} />}
@@ -34,7 +33,7 @@ function TaskStat({ tasks }) {
     })
 
     return (
-        <h1 className='text-center my-8 text-xl'>You have <strong>{tasksGoing}</strong> {tasksGoing > 1 ? 'tasks' : 'task'} remaining</h1>
+        <h1 className='text-center py-8 text-xl'>You have <strong>{tasksGoing}</strong> {tasksGoing > 1 ? 'tasks' : 'task'} remaining</h1>
     )
 }
 
