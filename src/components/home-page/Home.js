@@ -1,7 +1,7 @@
-import useFetch from './useFetch';
-import Loading from './components/Loading';
-import ErrorAlert from './components/ErrorAlert';
-import TasksList from './components/TasksList';
+import useFetch from '../../utils/useFetch';
+import Loading from '../ui/Loading';
+import ErrorAlert from '../ErrorAlert';
+import TasksList from '../TasksList';
 import { useState } from 'react';
 
 function Home() {    
